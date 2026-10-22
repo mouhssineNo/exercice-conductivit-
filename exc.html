@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zinc–HCl conductimétrie - Pf: Mouhssine Nouhassi</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+  svg: { fontCache: 'global' },
+  options: { enableMenu: false }
+};
+</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js"></script>
+<style>
+:root {
+  color-scheme: light;
+  box-sizing: border-box;
+  --bg: #f6f8f9;
+  --paper: #ffffff;
+  --ink: #18232b;
+  --muted: #56656f;
+  --line: #d8e0e5;
+  --accent: #0d6e7a;
+  --accent-soft: #e3f1f2;
+  --zinc: #7a5bb5;
+  --warn: #b4472f;
+  --result: #fff6d6;
+  --result-ink: #4a3700;
+  --btn-bg: #0d6e7a;
+  --btn-hover: #0a5660;
+  --btn-text: #ffffff;
+  --f-display: "Fraunces", Georgia, serif;
+  --f-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f161a;
+    --paper: #162127;
+    --ink: #e4ecef;
+    --muted: #9aaab3;
+    --line: #2a3a43;
+    --accent: #4fc1cc;
+    --accent-soft: #163a3f;
+    --zinc: #b39ae6;
+    --warn: #ef8a6f;
+    --result: #3a3115;
+    --result-ink: #f4dd94;
+    --btn-bg: #4fc1cc;
+    --btn-hover: #3db0bb;
+    --btn-text: #0f161a;
+    color-scheme: dark;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.6;
+  margin: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+}
+
+.wrap {
+  max-width: 840px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--accent);
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.eyebrow {
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.prof-badge {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--accent);
+}
+
+h1 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(28px, 5vw, 40px);
+  line-height: 1.15;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.eqbox {
+  background: var(--accent-soft);
+  border-radius: 6px;
+  padding: 4px 12px;
+  overflow-x: auto;
+}
+
+.data {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 4px 18px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.part {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.part h2 {
+  font-family: var(--f-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+}
+
+.part::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: var(--line);
+}
+
+.enonce {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+ol.qs {
+  margin: 0;
+  padding-left: 1.4em;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+ol.qs li {
+  max-width: 72ch;
+}
+
+.fig {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cap {
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Master Controls */
+.master-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: -10px;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--accent-soft);
+}
+
+/* Sections et solutions */
+section.q {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  transition: border-color 0.2s ease;
+}
+
+section.q.is-open {
+  border-color: var(--accent);
+}
+
+.qh {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.qh-title {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.num {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 26px;
+  color: var(--accent);
+  min-width: 28px;
+}
+
+h2 {
+  font-family: var(--f-body);
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h3 {
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 6px 0 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  max-width: 70ch;
+}
+
+.toggle-btn {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease, transform 0.1s ease;
+  white-space: nowrap;
+}
+
+.toggle-btn:hover {
+  background: var(--btn-hover);
+}
+
+.toggle-btn:active {
+  transform: scale(0.98);
+}
+
+.solution-body {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+section.q.is-open .solution-body {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.m {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 0;
+}
+
+.res {
+  background: var(--result);
+  color: var(--result-ink);
+  border-radius: 6px;
+  padding: 2px 14px;
+  align-self: flex-start;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.note {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.tbl {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 15px;
+  min-width: 600px;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 6px 8px;
+  text-align: center;
+}
+
+th {
+  background: var(--accent-soft);
+  font-weight: 600;
+}
+
+td.lab {
+  text-align: left;
+  color: var(--muted);
+}
+
+tr.max td {
+  background: var(--result);
+  color: var(--result-ink);
+}
+
+.chart {
+  overflow-x: auto;
+}
+
+.chart svg {
+  display: block;
+  width: 100%;
+  min-width: 520px;
+  height: auto;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.legend span::before {
+  content: "";
+  display: inline-block;
+  width: 22px;
+  height: 3px;
+  vertical-align: middle;
+  margin-right: 6px;
+  background: var(--c);
+}
+
+.legend .dash::before {
+  background: repeating-linear-gradient(90deg, var(--c) 0 5px, transparent 5px 9px);
+}
+
+mjx-container[display="true"] {
+  margin: .4em 0 !important;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="header-top">
+      <span class="eyebrow">Exercice 1 · Énoncé et corrigé interactif</span>
+      <span class="prof-badge">Pf : Mouhssine Nouhassi</span>
+    </div>
+    <h1>Suivi temporel par conductimétrie : zinc + acide chlorhydrique</h1>
+  </header>
+
+  <div class="part"><h2>Énoncé</h2></div>
+
+  <div class="enonce">
+    <p>Pour étudier la cinétique de la réaction de l'acide chlorhydrique avec le zinc, on introduit dans un ballon de volume \( V \) constant une masse \( m = 1{,}04\ \mathrm{g} \) de zinc en poudre, et on y verse à l'instant \( t_0 = 0\ \mathrm{min} \) un volume \( V = 80\ \mathrm{mL} \) d'une solution aqueuse d'acide chlorhydrique \( (\mathrm{H_3O^+} + \mathrm{C\ell^-}) \) de concentration \( C = 0{,}5\ \mathrm{mol\cdot L^{-1}} \).</p>
+    <p>L'équation de la réaction est :</p>
+    <div class="eqbox">\[ \mathrm{Zn_{(s)}} + 2\,\mathrm{H_3O^+_{(aq)}} \longrightarrow \mathrm{Zn^{2+}_{(aq)}} + \mathrm{H_{2(g)}} + 2\,\mathrm{H_2O_{(\ell)}} \]</div>
+    <p>On mesure à chaque instant \( t \) la conductivité \( \sigma(t) \) de la solution à l'aide d'un conductimètre. Les résultats permettent de tracer la courbe ci-dessous, qui représente l'évolution de \( \sigma(t) \) en fonction du temps.</p>
+    <div class="fig">
+      <div class="chart"><svg id="g0" viewBox="0 0 640 380" role="img" aria-label="Courbe de la conductivité en fonction du temps avec deux tangentes"></svg></div>
+      <p class="cap">Évolution de \( \sigma(t) \) ; tangentes à la courbe en \( t = 0 \) et \( t = 400\ \mathrm{s} \) (en pointillés).</p>
+    </div>
+    <ol class="qs">
+      <li>Calculer les quantités de matière initiales des réactifs.</li>
+      <li>Dresser le tableau d'avancement de cette réaction.</li>
+      <li>Calculer la valeur de l'avancement maximal de la réaction, et déduire le réactif limitant.</li>
+      <li>Montrer que la conductivité du mélange à un instant \( t \) est : \( \sigma(t) = -7{,}42\times10^{2}\,x + 21{,}30\ (\mathrm{S\cdot m^{-1}}) \).</li>
+      <li>Calculer la composition du système à l'instant \( t = 400\ \mathrm{s} \) et déduire le volume de \( \mathrm{H_2} \) formé à cet instant.</li>
+      <li>Trouver l'expression de la vitesse volumique \( v \) en fonction de \( V \) et \( \dfrac{d\sigma(t)}{dt} \). Calculer sa valeur aux instants \( t = 0\ \mathrm{s} \) et \( t = 400\ \mathrm{s} \). Expliquer le résultat.</li>
+      <li>Déterminer, en justifiant la réponse, le temps de demi-réaction.</li>
+    </ol>
+    <h3>Données</h3>
+    <div class="data">
+      <div>\( M(\mathrm{Zn}) = 65{,}4\ \mathrm{g\cdot mol^{-1}} \)</div>
+      <div>\( V_M = 25\ \mathrm{L\cdot mol^{-1}} \)</div>
+    </div>
+    <div class="tbl"><table style="min-width:420px">
+      <tr><th>Ion</th><th>\(\mathrm{C\ell^-}\)</th><th>\(\mathrm{H_3O^+}\)</th><th>\(\mathrm{Zn^{2+}}\)</th></tr>
+      <tr><td class="lab">\(\lambda\ (\mathrm{mS\cdot m^2\cdot mol^{-1}})\)</td><td>7,63</td><td>34,98</td><td>10,56</td></tr>
+    </table></div>
+  </div>
+
+  <div class="part"><h2>Corrigé Interactif</h2></div>
+
+  <div class="master-controls">
+    <button class="btn-secondary" id="btn-show-all">Afficher toutes les solutions</button>
+    <button class="btn-secondary" id="btn-hide-all">Masquer tout</button>
+  </div>
+
+  <!-- Question 1 -->
+  <section class="q" id="q1">
+    <div class="qh">
+      <div class="qh-title">
+        <span class="num">1</span>
+        <h2>Quantités de matière initiales des réactifs</h2>
+      </div>
+      <button class="toggle-btn" aria-expanded="false">
+        <span>Voir la solution</span>
+      </button>
+    </div>
+    <div class="solution-body">
+      <h3>Zinc</h3>
+      <div class="m">\[ n_0(\mathrm{Zn}) = \frac{m}{M(\mathrm{Zn})} = \frac{1{,}04}{65{,}4} \]</div>
+      <div class="res">\[ n_0(\mathrm{Zn}) \approx 1{,}59\times10^{-2}\ \mathrm{mol} \]</div>
+      <h3>Ions oxonium</h3>
+      <div class="m">\[ n_0(\mathrm{H_3O^+}) = C\cdot V = 0{,}5\times 80\times10^{-3} \]</div>
+      <div class="res">\[ n_0(\mathrm{H_3O^+}) = 4{,}0\times10^{-2}\ \mathrm{mol} \]</div>
+      <p class="note">De même \( n_0(\mathrm{C\ell^-}) = C\cdot V = 4{,}0\times10^{-2}\ \mathrm{mol} \) : ion spectateur, sa quantité reste constante.</p>
+    </div>
+  </section>
+
+  <!-- Question 2 -->
+  <section class="q" id="q2">
+    <div class="qh">
+      <div class="qh-title">
+        <span class="num">2</span>
+        <h2>Tableau d'avancement</h2>
+      </div>
+      <button class="toggle-btn" aria-expanded="false">
+        <span>Voir la solution</span>
+      </button>
+    </div>
+    <div class="solution-body">
+      <div class="tbl"><table>
+        <tr><th colspan="2">Équation de la réaction</th><th>\(\mathrm{Zn_{(s)}}\ \ +\)</th><th>\(2\,\mathrm{H_3O^+_{(aq)}}\ \ \longrightarrow\)</th><th>\(\mathrm{Zn^{2+}_{(aq)}}\ \ +\)</th><th>\(\mathrm{H_{2(g)}}\ \ +\)</th><th>\(2\,\mathrm{H_2O_{(\ell)}}\)</th></tr>
+        <tr><th>État du système</th><th>Avancement (mol)</th><th colspan="5">Quantités de matière (mol)</th></tr>
+        <tr><td class="lab">Initial</td><td>\(0\)</td><td>\(n_0(\mathrm{Zn})\)</td><td>\(n_0(\mathrm{H_3O^+})\)</td><td>\(0\)</td><td>\(0\)</td><td>excès</td></tr>
+        <tr><td class="lab">En cours</td><td>\(x\)</td><td>\(n_0(\mathrm{Zn})-x\)</td><td>\(n_0(\mathrm{H_3O^+})-2x\)</td><td>\(x\)</td><td>\(x\)</td><td>excès</td></tr>
+        <tr class="max"><td class="lab">Final</td><td>\(x_{max}\)</td><td>\(n_0(\mathrm{Zn})-x_{max}\)</td><td>\(n_0(\mathrm{H_3O^+})-2x_{max}\)</td><td>\(x_{max}\)</td><td>\(x_{max}\)</td><td>excès</td></tr>
+      </table></div>
+      <p class="note">Avec \( n_0(\mathrm{Zn}) = 1{,}59\times10^{-2}\ \mathrm{mol} \) et \( n_0(\mathrm{H_3O^+}) = 4{,}0\times10^{-2}\ \mathrm{mol} \).</p>
+    </div>
+  </section>
+
+  <!-- Question 3 -->
+  <section class="q" id="q3">
+    <div class="qh">
+      <div class="qh-title">
+        <span class="num">3</span>
+        <h2>Avancement maximal et réactif limitant</h2>
+      </div>
+      <button class="toggle-btn" aria-expanded="false">
+        <span>Voir la solution</span>
+      </button>
+    </div>
+    <div class="solution-body">
+      <p>Hypothèse 1 : le zinc est limitant.</p>
+      <div class="m">\[ n_0(\mathrm{Zn}) - x_{max} = 0 \;\Rightarrow\; x_{max} = n_0(\mathrm{Zn}) = 1{,}59\times10^{-2}\ \mathrm{mol} \]</div>
+      <p>Hypothèse 2 : les ions \( \mathrm{H_3O^+} \) sont limitants.</p>
+      <div class="m">\[ n_0(\mathrm{H_3O^+}) - 2x_{max} = 0 \;\Rightarrow\; x_{max} = \frac{n_0(\mathrm{H_3O^+})}{2} = 2{,}0\times10^{-2}\ \mathrm{mol} \]</div>
+      <p>L'avancement maximal est la plus petite des deux valeurs :</p>
+      <div class="res">\[ x_{max} = 1{,}59\times10^{-2}\ \mathrm{mol} \quad\text{: le zinc est le réactif limitant} \]</div>
+    </div>
+  </section>
+
+  <!-- Question 4 -->
+  <section class="q" id="q4">
+    <div class="qh">
+      <div class="qh-title">
+        <span class="num">4</span>
+        <h2>Expression de la conductivité \( \sigma(t) \)</h2>
+      </div>
+      <button class="toggle-btn" aria-expanded="false">
+        <span>Voir la solution</span>
+      </button>
+    </div>
+    <div class="solution-body">
+      <p>La solution contient les ions \( \mathrm{H_3O^+} \), \( \mathrm{C\ell^-} \) et \( \mathrm{Zn^{2+}} \) :</p>
+      <div class="m">\[ \sigma = \lambda_{\mathrm{H_3O^+}}[\mathrm{H_3O^+}] + \lambda_{\mathrm{C\ell^-}}[\mathrm{C\ell^-}] + \lambda_{\mathrm{Zn^{2+}}}[\mathrm{Zn^{2+}}] \]</div>
+      <p>D'après le tableau d'avancement, avec \( n_0 = C\cdot V \) :</p>
+      <div class="m">\[ [\mathrm{H_3O^+}] = \frac{CV-2x}{V} \qquad [\mathrm{C\ell^-}] = \frac{CV}{V} \qquad [\mathrm{Zn^{2+}}] = \frac{x}{V} \]</div>
+      <div class="m">\[ \sigma = \frac{\lambda_{\mathrm{H_3O^+}}(CV-2x) + \lambda_{\mathrm{C\ell^-}}\,CV + \lambda_{\mathrm{Zn^{2+}}}\,x}{V} \]</div>
+      <div class="m">\[ \boxed{\;\sigma = C\left(\lambda_{\mathrm{H_3O^+}} + \lambda_{\mathrm{C\ell^-}}\right) + \frac{\lambda_{\mathrm{Zn^{2+}}} - 2\lambda_{\mathrm{H_3O^+}}}{V}\,x\;} \]</div>
+      <h3>Application numérique (unités SI)</h3>
+      <p>\( C = 0{,}5\ \mathrm{mol\cdot L^{-1}} = 500\ \mathrm{mol\cdot m^{-3}} \), \( V = 80\ \mathrm{mL} = 8\times10^{-5}\ \mathrm{m^3} \), \( \lambda \) en \( \mathrm{S\cdot m^2\cdot mol^{-1}} \).</p>
+      <div class="m">\[ C\left(\lambda_{\mathrm{H_3O^+}} + \lambda_{\mathrm{C\ell^-}}\right) = 500\times(34{,}98+7{,}63)\times10^{-3} = 21{,}30\ \mathrm{S\cdot m^{-1}} \]</div>
+      <div class="m">\[ \frac{\lambda_{\mathrm{Zn^{2+}}} - 2\lambda_{\mathrm{H_3O^+}}}{V} = \frac{(10{,}56 - 2\times34{,}98)\times10^{-3}}{8\times10^{-5}} = -742{,}5 \approx -7{,}42\times10^{2}\ \mathrm{S\cdot m^{-1}\cdot mol^{-1}} \]</div>
+      <div class="res">\[ \sigma(t) = -7{,}42\times10^{2}\,x + 21{,}30 \quad (\mathrm{S\cdot m^{-1}}) \]</div>
+      <p class="note">Vérification : \( \sigma_0 = 21{,}30\ \mathrm{S\cdot m^{-1}} \) et \( \sigma_f = 21{,}30 - 742\times1{,}59\times10^{-2} \approx 9{,}5\ \mathrm{S\cdot m^{-1}} \), valeur du palier de la courbe.</p>
+    </div>
+  </section>
+
+  <!-- Question 5 -->
+  <section class="q" id="q5">
+    <div class="qh">
+      <div class="qh-title">
+        <span class="num">5</span>
+        <h2>Composition du système à \( t = 400\ \mathrm{s} \)</h2>
+      </div>
+      <button class="toggle-btn" aria-expanded="false">
+        <span>Voir la solution</span>
+      </button>
+    </div>
+    <div class="solution-body">
+      <p>Lecture graphique : \( \sigma(400\ \mathrm{s}) \approx 11\ \mathrm{S\cdot m^{-1}} \). On isole \( x \) :</p>
+      <div class="m">\[ x = \frac{21{,}30 - \sigma}{7{,}42\times10^{2}} = \frac{21{,}30 - 11}{742} \]</div>
+      <div class="res">\[ x(400\ \mathrm{s}) \approx 1{,}39\times10^{-2}\ \mathrm{mol} \]</div>
+      <div class="tbl"><table>
+        <tr><th>Espèce</th><th>\(\mathrm{Zn}\)</th><th>\(\mathrm{H_3O^+}\)</th><th>\(\mathrm{Zn^{2+}}\)</th><th>\(\mathrm{H_2}\)</th><th>\(\mathrm{C\ell^-}\)</th></tr>
+        <tr><td class="lab">Expression</td><td>\(n_0(\mathrm{Zn})-x\)</td><td>\(n_0(\mathrm{H_3O^+})-2x\)</td><td>\(x\)</td><td>\(x\)</td><td>\(CV\)</td></tr>
+        <tr class="max"><td class="lab">\(n\) (mol)</td><td>\(2{,}0\times10^{-3}\)</td><td>\(1{,}22\times10^{-2}\)</td><td>\(1{,}39\times10^{-2}\)</td><td>\(1{,}39\times10^{-2}\)</td><td>\(4{,}0\times10^{-2}\)</td></tr>
+      </table></div>
+      <h3>Volume de dihydrogène</h3>
+      <div class="m">\[ V(\mathrm{H_2}) = n(\mathrm{H_2})\cdot V_M = x\cdot V_M = 1{,}39\times10^{-2}\times25 \]</div>
+      <div class="res">\[ V(\mathrm{H_2}) \approx 0{,}35\ \mathrm{L} \]</div>
+    </div>
+  </section>
+
+  <!-- Question 6 -->
+  <section class="q" id="q6">
+    <div class="qh">
+      <div class="qh-title">
+        <span class="num">6</span>
+        <h2>Vitesse volumique en fonction de \( V \) et \( \dfrac{d\sigma}{dt} \)</h2>
+      </div>
+      <button class="toggle-btn" aria-expanded="false">
+        <span>Voir la solution</span>
+      </button>
+    </div>
+    <div class="solution-body">
+      <p>Par définition :</p>
+      <div class="m">\[ v = \frac{1}{V}\,\frac{dx}{dt} \]</div>
+      <p>D'après la question 4 : \( x = \dfrac{21{,}30 - \sigma}{7{,}42\times10^{2}} \), donc</p>
+      <div class="m">\[ \frac{dx}{dt} = -\frac{1}{7{,}42\times10^{2}}\,\frac{d\sigma}{dt} \]</div>
+      <div class="res">\[ v = -\frac{1}{7{,}42\times10^{2}\cdot V}\,\frac{d\sigma}{dt} \]</div>
+      <p>Avec \( V = 0{,}080\ \mathrm{L} \) : \( 742\times0{,}080 = 59{,}4 \), d'où \( v = -\dfrac{1}{59{,}4}\dfrac{d\sigma}{dt} \) en \( \mathrm{mol\cdot L^{-1}\cdot s^{-1}} \). La dérivée \( \frac{d\sigma}{dt} \) est la pente de la tangente à la courbe.</p>
+
+      <h3>À \( t = 0\ \mathrm{s} \)</h3>
+      <p>La tangente passe par \( (0\,;\,21{,}3) \) et \( (400\,;\,0) \) :</p>
+      <div class="m">\[ \left(\frac{d\sigma}{dt}\right)_{t=0} = \frac{0 - 21{,}3}{400 - 0} \approx -5{,}3\times10^{-2}\ \mathrm{S\cdot m^{-1}\cdot s^{-1}} \]</div>
+      <div class="res">\[ v_0 = \frac{5{,}3\times10^{-2}}{59{,}4} \approx 9{,}0\times10^{-4}\ \mathrm{mol\cdot L^{-1}\cdot s^{-1}} \]</div>
+
+      <h3>À \( t = 400\ \mathrm{s} \)</h3>
+      <p>La tangente passe par \( (200\,;\,13) \) et \( (1040\,;\,5) \) :</p>
+      <div class="m">\[ \left(\frac{d\sigma}{dt}\right)_{t=400} = \frac{5 - 13}{1040 - 200} \approx -9{,}5\times10^{-3}\ \mathrm{S\cdot m^{-1}\cdot s^{-1}} \]</div>
+      <div class="res">\[ v_{400} = \frac{9{,}5\times10^{-3}}{59{,}4} \approx 1{,}6\times10^{-4}\ \mathrm{mol\cdot L^{-1}\cdot s^{-1}} \]</div>
+
+      <h3>Explication</h3>
+      <p>\( v_{400} < v_0 \) : la vitesse volumique diminue au cours du temps, car la concentration des réactifs (en particulier \( [\mathrm{H_3O^+}] \)) diminue. La concentration des réactifs est un facteur cinétique.</p>
+    </div>
+  </section>
+
+  <!-- Question 7 -->
+  <section class="q" id="q7">
+    <div class="qh">
+      <div class="qh-title">
+        <span class="num">7</span>
+        <h2>Temps de demi-réaction \( t_{1/2} \)</h2>
+      </div>
+      <button class="toggle-btn" aria-expanded="false">
+        <span>Voir la solution</span>
+      </button>
+    </div>
+    <div class="solution-body">
+      <h3>Définition</h3>
+      <p>Le temps de demi-réaction \( t_{1/2} \) est la durée nécessaire pour que l'avancement atteigne la moitié de sa valeur finale. Ici la réaction est totale (le zinc disparaît), donc \( x_f = x_{max} \) :</p>
+      <div class="m">\[ x(t_{1/2}) = \frac{x_f}{2} = \frac{x_{max}}{2} \]</div>
+
+      <h3>Étape 1 : valeur de l'avancement à \( t_{1/2} \)</h3>
+      <div class="m">\[ x(t_{1/2}) = \frac{1{,}59\times10^{-2}}{2} = 7{,}95\times10^{-3}\ \mathrm{mol} \]</div>
+
+      <h3>Étape 2 : conductivité correspondante</h3>
+      <p>On remplace \( x \) dans la relation de la question 4, \( \sigma = -7{,}42\times10^{2}\,x + 21{,}30 \) :</p>
+      <div class="m">\[ \sigma_{1/2} = \sigma(t_{1/2}) = -7{,}42\times10^{2}\times7{,}95\times10^{-3} + 21{,}30 \]</div>
+      <div class="m">\[ \sigma_{1/2} = -5{,}90 + 21{,}30 \approx 15{,}4\ \mathrm{S\cdot m^{-1}} \]</div>
+
+      <h3>Vérification par une autre méthode</h3>
+      <p>La relation \( \sigma = a\,x + b \) est affine. On l'écrit à \( t = 0 \) et à l'état final :</p>
+      <div class="m">\[ \sigma_0 = b \qquad\qquad \sigma_f = a\,x_{max} + b \]</div>
+      <p>À \( t_{1/2} \), \( x = \dfrac{x_{max}}{2} \), donc :</p>
+      <div class="m">\[ \sigma_{1/2} = a\,\frac{x_{max}}{2} + b = \frac{(a\,x_{max} + b) + b}{2} = \frac{\sigma_f + \sigma_0}{2} \]</div>
+      <p>Avec les valeurs lues sur le graphe, \( \sigma_0 = 21{,}3\ \mathrm{S\cdot m^{-1}} \) et \( \sigma_f \approx 9{,}5\ \mathrm{S\cdot m^{-1}} \) (palier) :</p>
+      <div class="m">\[ \sigma_{1/2} = \frac{21{,}3 + 9{,}5}{2} = 15{,}4\ \mathrm{S\cdot m^{-1}} \]</div>
+      <p class="note">Les deux méthodes donnent la même valeur.</p>
+
+      <h3>Étape 3 : lecture graphique</h3>
+      <p>On trace la droite horizontale \( \sigma = 15{,}4\ \mathrm{S\cdot m^{-1}} \). Elle coupe la courbe \( \sigma = f(t) \) en un point. L'abscisse de ce point est \( t_{1/2} \).</p>
+      <div class="chart"><svg id="g" viewBox="0 0 640 380" role="img" aria-label="Détermination graphique du temps de demi-réaction"></svg></div>
+      <div class="legend">
+        <span style="--c:var(--accent)">\(\sigma = f(t)\)</span>
+        <span class="dash" style="--c:var(--warn)">\(\sigma_{1/2} = 15{,}4\ \mathrm{S\cdot m^{-1}}\) et projection sur l'axe du temps</span>
+        <span class="dash" style="--c:var(--muted)">\(\sigma_0\) et \(\sigma_f\)</span>
+      </div>
+
+      <h3>Résultat</h3>
+      <div class="res">\[ t_{1/2} \approx 160\ \mathrm{s} \]</div>
+      <p class="note">À \( t_{1/2} \approx 160\ \mathrm{s} \), la moitié du zinc a déjà réagi. La conductivité continue ensuite à diminuer de plus en plus lentement et atteint pratiquement le palier \( \sigma_f \approx 9{,}5\ \mathrm{S\cdot m^{-1}} \) vers \( t \approx 1000\ \mathrm{s} \).</p>
+    </div>
+  </section>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const NS = 'http://www.w3.org/2000/svg';
+  const L = 56, R = 620, T = 20, B = 330;
+  const X = t => L + (R - L) * t / 1600;
+  const Y = s => B - (B - T) * s / 25;
+  const f = t => 9.5 + 11.8 * Math.exp(-t / 222);
+
+  function chart(id) {
+    const svg = document.getElementById(id);
+    if (!svg) return null;
+    const el = (n, a, txt) => {
+      const e = document.createElementNS(NS, n);
+      for (const k in a) e.setAttribute(k, a[k]);
+      if (txt != null) e.textContent = txt;
+      svg.appendChild(e);
+      return e;
+    };
+    for (let t = 0; t <= 1600; t += 100) {
+      el('line', { x1: X(t), x2: X(t), y1: T, y2: B, stroke: 'var(--line)', 'stroke-width': t % 200 ? 0.5 : 1 });
+      if (t % 200 === 0) el('text', { x: X(t), y: B + 18, 'text-anchor': 'middle', 'font-size': 12, fill: 'var(--muted)', 'font-family': 'var(--f-mono)' }, t);
+    }
+    for (let s = 0; s <= 25; s++) {
+      el('line', { x1: L, x2: R, y1: Y(s), y2: Y(s), stroke: 'var(--line)', 'stroke-width': s % 5 ? 0.4 : 1 });
+      if (s % 5 === 0) el('text', { x: L - 8, y: Y(s) + 4, 'text-anchor': 'end', 'font-size': 12, fill: 'var(--muted)', 'font-family': 'var(--f-mono)' }, s);
+    }
+    el('line', { x1: L, x2: R, y1: B, y2: B, stroke: 'var(--ink)', 'stroke-width': 1.5 });
+    el('line', { x1: L, x2: L, y1: T, y2: B, stroke: 'var(--ink)', 'stroke-width': 1.5 });
+    el('text', { x: R, y: B - 8, 'text-anchor': 'end', 'font-size': 13, fill: 'var(--ink)', 'font-weight': 600 }, 't (s)');
+    el('text', { x: L + 8, y: T + 14, 'font-size': 13, fill: 'var(--ink)', 'font-weight': 600 }, 'σ (S·m⁻¹)');
+    return el;
+  }
+
+  const curve = el => {
+    let p = '';
+    for (let t = 0; t <= 1400; t += 10) {
+      p += (t ? 'L' : 'M') + X(t).toFixed(1) + ' ' + Y(f(t)).toFixed(1);
+    }
+    el('path', { d: p, fill: 'none', stroke: 'var(--accent)', 'stroke-width': 2.6 });
+  };
+
+  let el = chart('g0');
+  if (el) {
+    curve(el);
+    el('line', { x1: X(0), y1: Y(21.3), x2: X(400), y2: Y(0), stroke: 'var(--zinc)', 'stroke-width': 1.6, 'stroke-dasharray': '6 4' });
+    el('line', { x1: X(200), y1: Y(13), x2: X(1040), y2: Y(5), stroke: 'var(--zinc)', 'stroke-width': 1.6, 'stroke-dasharray': '6 4' });
+  }
+
+  el = chart('g');
+  if (el) {
+    el('line', { x1: L, x2: R, y1: Y(21.3), y2: Y(21.3), stroke: 'var(--muted)', 'stroke-width': 1, 'stroke-dasharray': '5 4' });
+    el('line', { x1: L, x2: R, y1: Y(9.5), y2: Y(9.5), stroke: 'var(--muted)', 'stroke-width': 1, 'stroke-dasharray': '5 4' });
+    el('text', { x: R - 4, y: Y(21.3) - 6, 'text-anchor': 'end', 'font-size': 12, fill: 'var(--muted)' }, 'σ₀ = 21,3');
+    el('text', { x: R - 4, y: Y(9.5) + 16, 'text-anchor': 'end', 'font-size': 12, fill: 'var(--muted)' }, 'σf ≈ 9,5');
+    curve(el);
+    el('line', { x1: L, x2: X(160), y1: Y(15.4), y2: Y(15.4), stroke: 'var(--warn)', 'stroke-width': 1.6, 'stroke-dasharray': '6 4' });
+    el('line', { x1: X(160), x2: X(160), y1: Y(15.4), y2: B, stroke: 'var(--warn)', 'stroke-width': 1.6, 'stroke-dasharray': '6 4' });
+    el('circle', { cx: X(160), cy: Y(15.4), r: 5, fill: 'var(--warn)' });
+    el('text', { x: X(160) + 10, y: Y(15.4) - 8, 'font-size': 12, fill: 'var(--warn)', 'font-weight': 600 }, 'σ½ = 15,4');
+    el('text', { x: X(160) + 6, y: B - 8, 'font-size': 12, fill: 'var(--warn)', 'font-weight': 600 }, 't½ ≈ 160 s');
+  }
+
+  const sections = document.querySelectorAll('section.q');
+
+  function setSectionState(section, isOpen) {
+    const btn = section.querySelector('.toggle-btn');
+    const label = btn.querySelector('span');
+    if (isOpen) {
+      section.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      label.textContent = 'Masquer la solution';
+    } else {
+      section.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      label.textContent = 'Voir la solution';
+    }
+  }
+
+  sections.forEach(section => {
+    const btn = section.querySelector('.toggle-btn');
+    btn.addEventListener('click', () => {
+      const isOpen = section.classList.contains('is-open');
+      setSectionState(section, !isOpen);
+    });
+  });
+
+  document.getElementById('btn-show-all').addEventListener('click', () => {
+    sections.forEach(sec => setSectionState(sec, true));
+  });
+
+  document.getElementById('btn-hide-all').addEventListener('click', () => {
+    sections.forEach(sec => setSectionState(sec, false));
+  });
+});
+</script>
+
+</body>
+</html>
+
